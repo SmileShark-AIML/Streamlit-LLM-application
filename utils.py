@@ -3,13 +3,12 @@ import boto3
 from datetime import datetime
 from pytz import timezone
 
-from dotenv import load_dotenv
 import os
 
-load_dotenv()
-
-dataSourceId = os.getenv('DATASOURCE_ID')
-knowledgeBaseId = os.getenv('KNOWLEDGEBASE_ID')
+aws_access_key_id = os.environ['AWS_ACCESS_KEY']
+aws_secret_access_key = os.environ['AWS_SECRET_KEY']
+dataSourceId = os.environ['DATASOURCE_ID']
+knowledgeBaseId = os.environ['KNOWLEDGEBASE_ID']
 
 def utc_to_kst(utc_time):
     """
@@ -82,8 +81,15 @@ def upload_s3():
 
     with container:
         with col1:
-            s3 = boto3.client('s3')
-            bedrock_agent = boto3.client( 'bedrock-agent' , region_name="us-west-2")
+            s3 = boto3.client('s3',
+                              aws_access_key_id=aws_access_key_id,
+                              aws_secret_access_key=aws_secret_access_key,)
+            
+            bedrock_agent = boto3.client( 'bedrock-agent' ,
+                                         region_name="us-west-2",
+                                         aws_access_key_id=aws_access_key_id,
+                                         aws_secret_access_key=aws_secret_access_key,)
+            
             uploaded_file = st.file_uploader("파일 선택", type=["txt", "md", "html", "doc", "docx", "csv", "xls", "xlsx", "pdf"], label_visibility="visible")
             
         with col2:

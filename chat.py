@@ -2,6 +2,7 @@ import streamlit as st
 from utils import clear_messages
 from qa import run_qa
 
+
 def chat_UI():
     History = st.session_state.current_History
     st.write("### Chat")

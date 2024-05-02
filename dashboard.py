@@ -14,9 +14,17 @@ CLOUDWATCH_LATENCY_STAT = 'Average'
 CLOUDWATCH_OTHER_STAT = 'Sum'
 MODEL_ID = "anthropic.claude-3-sonnet-20240229-v1:0"
 
+import os
+
+aws_access_key_id = os.environ['AWS_ACCESS_KEY']
+aws_secret_access_key = os.environ['AWS_SECRET_KEY']
+
 def dashboard_UI():
     KST = timezone('Asia/Seoul')
-    cloudwatch = boto3.client('cloudwatch', region_name="us-west-2")
+    cloudwatch = boto3.client('cloudwatch',
+                              region_name="us-west-2",
+                              aws_access_key_id=aws_access_key_id,
+                              aws_secret_access_key=aws_secret_access_key,)
     current_year = datetime.now().year
     current_month = datetime.now().month
     months = [datetime(current_year, m, 1).strftime('%Y-%m') for m in range(1, 13)]

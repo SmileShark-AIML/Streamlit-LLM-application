@@ -9,7 +9,7 @@ from kb import kb_UI
 from experimental import experimental_UI
 from dashboard import dashboard_UI
 
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide", page_icon=":shark:", page_title="SmileShark LLM APP Demo (Bedrock)")
 
 session_init()
 

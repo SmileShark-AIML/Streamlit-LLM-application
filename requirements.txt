@@ -1,0 +1,13 @@
+streamlit
+streamlit-option-menu
+langchain
+langchain-community
+langchain-experimental
+langchain-core
+langchain_aws
+langsmith
+boto3
+pytz
+altair
+itertools
+python-dotenv

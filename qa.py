@@ -6,13 +6,12 @@ from langchain.prompts import PromptTemplate
 import time
 import random
 
-from dotenv import load_dotenv
 import os
 
-load_dotenv()
-
-dataSourceId = os.getenv('DATASOURCE_ID')
-knowledgeBaseId = os.getenv('KNOWLEDGEBASE_ID')
+aws_access_key_id = os.environ['AWS_ACCESS_KEY']
+aws_secret_access_key = os.environ['AWS_SECRET_KEY']
+dataSourceId = os.environ['DATASOURCE_ID']
+knowledgeBaseId = os.environ['KNOWLEDGEBASE_ID']
 
 def retry_with_exponential_backoff_and_jitter(
     func,

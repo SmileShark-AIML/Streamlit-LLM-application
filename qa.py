@@ -94,7 +94,7 @@ Use colloquial language, but avoid formal expressions.
 Finally, if you are dissatisfied with the answer with thank you, please tell them to use the 스마일샤크 Tech Support Center.
 
 <CONVERSATION_HISTORY>
-유저와의 이전대화 : """ + string_history + """
+유저와의 이전대화 : """ + string_history.replace('{', '[').replace('}', ']') + """
 </CONVERSATION_HISTORY>
 
 <DOCUMENTS>

@@ -25,6 +25,7 @@ def dashboard_UI():
                               region_name="us-west-2",
                               aws_access_key_id=aws_access_key_id,
                               aws_secret_access_key=aws_secret_access_key,)
+    
     current_year = datetime.now().year
     current_month = datetime.now().month
     months = [datetime(current_year, m, 1).strftime('%Y-%m') for m in range(1, 13)]

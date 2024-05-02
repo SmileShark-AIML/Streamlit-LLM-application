@@ -9,5 +9,4 @@ langsmith
 boto3
 pytz
 altair
-itertools
 python-dotenv

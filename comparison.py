@@ -27,31 +27,34 @@ def comparison_UI():
         with st.spinner("답변 생성 중..."):
             models = ["Claude 3 Sonnet", "Claude 3 Opus", "Llama 3 70B Instruct", "Mistral Large"]
             with ThreadPoolExecutor() as executor:
-                answers = list(executor.map(run_qa, [prompt] * len(models)))
+                answers = list(executor.map(run_qa, [prompt] * len(models), models))
+
+            # 각 답변을 별도의 변수에 할당
+            answer1, answer2, answer3, answer4 = answers
 
             # Display the table with HTML formatting and no borders
             table_html = """
             <table style="border-collapse: collapse; width: 100%;">
-              <tr>
-                <td style="background-color: #f0f0f0; padding: 10px; font-weight: bold; text-align: center; border: none; width: 50%;">{}</td>
-                <td style="background-color: #f0f0f0; padding: 10px; font-weight: bold; text-align: center; border: none; width: 50%;">{}</td>
-              </tr>
-              <tr>
-                <td style="vertical-align: top; padding: 10px; border: none;">{}</td>
-                <td style="vertical-align: top; padding: 10px; border: none;">{}</td>
-              </tr>
-              <tr>
-                <td style="background-color: #f0f0f0; padding: 10px; font-weight: bold; text-align: center; border: none;">{}</td>
-                <td style="background-color: #f0f0f0; padding: 10px; font-weight: bold; text-align: center; border: none;">{}</td>
-              </tr>
-              <tr>
-                <td style="vertical-align: top; padding: 10px; border: none;">{}</td>
-                <td style="vertical-align: top; padding: 10px; border: none;">{}</td>
-              </tr>
+            <tr>
+            <td style="background-color: #f0f0f0; padding: 10px; font-weight: bold; text-align: center; border: none; width: 50%;">{}</td>
+            <td style="background-color: #f0f0f0; padding: 10px; font-weight: bold; text-align: center; border: none; width: 50%;">{}</td>
+            </tr>
+            <tr>
+            <td style="vertical-align: top; padding: 10px; border: none; white-space: pre-wrap; width: 50%;">{}</td>
+            <td style="vertical-align: top; padding: 10px; border: none; white-space: pre-wrap; width: 50%;">{}</td>
+            </tr>
+            <tr>
+            <td style="background-color: #f0f0f0; padding: 10px; font-weight: bold; text-align: center; border: none; width: 50%;">{}</td>
+            <td style="background-color: #f0f0f0; padding: 10px; font-weight: bold; text-align: center; border: none; width: 50%;">{}</td>
+            </tr>
+            <tr>
+            <td style="vertical-align: top; padding: 10px; border: none; white-space: pre-wrap; width: 50%;">{}</td>
+            <td style="vertical-align: top; padding: 10px; border: none; white-space: pre-wrap; width: 50%;">{}</td>
+            </tr>
             </table>
-            """.format(models[0], models[1], answers[0], answers[1], models[2], models[3], answers[2], answers[3])
+            """.format(models[0], models[1], answer1, answer2, models[2], models[3], answer3, answer4)
 
-            st.write(table_html, unsafe_allow_html=True)
+            st.markdown(table_html, unsafe_allow_html=True)
 
             # Add assistant responses to chat history
             for i, answer in enumerate(answers):

@@ -8,6 +8,7 @@ from chat import chat_UI
 from kb import kb_UI
 from experimental import experimental_UI
 from dashboard import dashboard_UI
+from comparison import comparison_UI
 
 st.set_page_config(layout="wide", page_icon=":shark:", page_title="SmileShark LLM APP Demo (Bedrock)")
 
@@ -41,8 +42,8 @@ with st.sidebar:
         </style>
     """
     st.markdown(button_style, unsafe_allow_html=True)
-    selected = option_menu("Bedrock Chat", ["채팅", 'KB관리', 'Dashboard', 'Experimental'], 
-        icons=['chat-left-dots', 'sliders','speedometer' , 'cone-striped'], menu_icon="send", default_index=0)
+    selected = option_menu("Bedrock Chat", ["채팅", 'LLM 비교', 'KB관리', 'Dashboard', 'Experimental'], 
+        icons=['chat-left-dots', 'layers-half', 'sliders','graph-up' , 'cone-striped'], menu_icon="send", default_index=0)
     
     sidebar_UI(selected)
 
@@ -52,6 +53,9 @@ if selected == "채팅":
 if selected == "KB관리": 
     get_s3_list()
     kb_UI()
+
+if selected == "LLM 비교": 
+    comparison_UI()
 
 if selected == "Dashboard":
     dashboard_UI()
